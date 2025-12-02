@@ -1,6 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User } from '@supabase/supabase-js';
 import { supabase, Profile } from '../lib/supabase';
+import { fetchProfile } from '../lib/profile';
 
 interface AuthContextType {
   user: User | null;
@@ -19,24 +21,12 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// profile helper is in src/lib/profile
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const fetchProfile = async (userId: string) => {
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', userId)
-      .maybeSingle();
-
-    if (error) {
-      console.error('Error fetching profile:', error);
-      return null;
-    }
-    return data;
-  };
 
   const refreshProfile = async () => {
     if (user) {
@@ -46,10 +36,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    const t0 = performance.now();
     supabase.auth.getSession().then(({ data: { session } }) => {
+      const t1 = performance.now();
+      console.info(`[Auth] getSession took ${(t1 - t0).toFixed(1)}ms`);
       setUser(session?.user ?? null);
       if (session?.user) {
-        fetchProfile(session.user.id).then(setProfile);
+        const t2 = performance.now();
+        fetchProfile(session.user.id).then((p) => {
+          const t3 = performance.now();
+          console.info(`[Auth] fetchProfile took ${(t3 - t2).toFixed(1)}ms`);
+          setProfile(p);
+        });
       }
       setLoading(false);
     });
@@ -58,7 +56,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       (async () => {
         setUser(session?.user ?? null);
         if (session?.user) {
+          const t0 = performance.now();
           const profileData = await fetchProfile(session.user.id);
+          const t1 = performance.now();
+          console.info(`[Auth] onAuthStateChange fetchProfile took ${(t1 - t0).toFixed(1)}ms`);
           setProfile(profileData);
         } else {
           setProfile(null);

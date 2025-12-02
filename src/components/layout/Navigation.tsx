@@ -1,5 +1,5 @@
 import { useAuth } from '../../contexts/AuthContext';
-import { Calendar, Users, Building2, MessageSquare, BarChart3, MessageCircle } from 'lucide-react';
+import { Calendar, Users, Building2, MessageSquare, BarChart3 } from 'lucide-react';
 
 interface NavigationProps {
   activeTab: string;

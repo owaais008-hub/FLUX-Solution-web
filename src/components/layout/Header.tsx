@@ -1,13 +1,20 @@
 import { useAuth } from '../../contexts/AuthContext';
-import { LogOut, Calendar, MessageSquare, User, Settings } from 'lucide-react';
+import { LogOut, Calendar, User, Settings } from 'lucide-react';
 
 export default function Header({ onEditProfile }: { onEditProfile: () => void }) {
   const { profile, signOut } = useAuth();
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <header className="bg-white shadow-sm border-b border-gray-200 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5">
+        <img 
+          src="/Screenshot%202025-10-22%20194707.png" 
+          alt="Background" 
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex justify-between items-center h-24">
           <div className="flex items-center">
             <Calendar className="w-8 h-8 text-blue-600" />
             <h1 className="ml-2 text-xl font-bold text-gray-900">EventSphere</h1>

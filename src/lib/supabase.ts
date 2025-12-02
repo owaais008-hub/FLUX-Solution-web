@@ -3,9 +3,18 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Create supabase client with safe defaults
+// If env vars are not set, create a client that will gracefully fail
+export const supabase = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : createClient('https://placeholder.supabase.co', 'placeholder-key', {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
 
-export type UserRole = 'admin' | 'exhibitor' | 'attendee';
+export type UserRole = 'admin' | 'client' | 'developer';
 
 export interface Profile {
   id: string;
@@ -15,64 +24,41 @@ export interface Profile {
   company_name?: string;
   phone?: string;
   avatar_url?: string;
+  bio?: string;
+  address?: string;
+  is_verified?: boolean;
+  documents?: any[];
   created_at: string;
 }
 
-export interface Expo {
+export interface Project {
   id: string;
   title: string;
   description: string;
-  theme: string;
-  location: string;
-  start_date: string;
-  end_date: string;
-  floor_plan_url?: string;
-  status: 'draft' | 'published' | 'completed' | 'cancelled';
-  created_by: string;
+  category: string;
+  technologies: string[];
+  image_url?: string;
+  gradient?: string;
+  live_url?: string;
+  github_url?: string;
+  status: 'planning' | 'in-progress' | 'completed' | 'on-hold';
+  featured?: boolean;
+  display_order?: number;
   created_at: string;
   updated_at: string;
 }
 
-export interface Booth {
+export interface Service {
   id: string;
-  expo_id: string;
-  booth_number: string;
-  size: 'small' | 'medium' | 'large';
-  position_x: number;
-  position_y: number;
-  price: number;
-  status: 'available' | 'reserved' | 'occupied';
-  exhibitor_id?: string;
-  created_at: string;
-}
-
-export interface ExhibitorApplication {
-  id: string;
-  expo_id: string;
-  exhibitor_id: string;
-  company_name: string;
-  products_services: string;
-  logo_url?: string;
-  website?: string;
-  booth_preference: 'small' | 'medium' | 'large';
-  status: 'pending' | 'approved' | 'rejected';
-  assigned_booth_id?: string;
-  submitted_at: string;
-  reviewed_at?: string;
-  reviewed_by?: string;
-}
-
-export interface Session {
-  id: string;
-  expo_id: string;
   title: string;
   description: string;
-  speaker_name: string;
-  location: string;
-  start_time: string;
-  end_time: string;
-  capacity: number;
+  icon: string;
+  features: string[];
+  gradient?: string;
+  display_order?: number;
+  is_active?: boolean;
   created_at: string;
+  updated_at?: string;
 }
 
 export interface Message {
@@ -82,5 +68,31 @@ export interface Message {
   subject: string;
   content: string;
   is_read: boolean;
+  created_at: string;
+  // joined rows when selecting sender/recipient profiles
+  sender?: {
+    id?: string;
+    full_name?: string;
+    company_name?: string;
+  };
+  recipient?: {
+    id?: string;
+    full_name?: string;
+    company_name?: string;
+  };
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+  avatar_url?: string;
+  social_links: {
+    linkedin?: string;
+    github?: string;
+    twitter?: string;
+  };
+  skills: string[];
   created_at: string;
 }

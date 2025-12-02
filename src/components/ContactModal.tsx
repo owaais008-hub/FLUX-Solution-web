@@ -111,7 +111,7 @@ export default function ContactModal({ onClose, onSuccess }: ContactModalProps) 
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                placeholder="+92 331 6078214"
+                placeholder="+92 319 4699095"
               />
             </div>
 

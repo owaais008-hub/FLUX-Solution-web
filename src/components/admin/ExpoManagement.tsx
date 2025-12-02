@@ -4,11 +4,9 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Plus, CreditCard as Edit, Trash2, Eye, Calendar, Download, Search, Filter } from 'lucide-react';
 import ExpoForm from './ExpoForm';
 import ExpoDetails from './ExpoDetails';
-import jsPDF from 'jspdf';
-import Papa from 'papaparse';
 
 export default function ExpoManagement() {
-  const { profile } = useAuth();
+  useAuth();
   const [expos, setExpos] = useState<Expo[]>([]);
   const [filteredExpos, setFilteredExpos] = useState<Expo[]>([]);
   const [loading, setLoading] = useState(true);
@@ -19,6 +17,8 @@ export default function ExpoManagement() {
   const [statusFilter, setStatusFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+  let jsPDF: any = null;
+  let Papa: any = null;
 
   useEffect(() => {
     fetchExpos();
@@ -27,14 +27,14 @@ export default function ExpoManagement() {
   useEffect(() => {
     let filtered = expos;
     if (searchTerm) {
-      filtered = filtered.filter(expo =>
+      filtered = filtered.filter((expo: Expo) =>
         expo.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         expo.theme.toLowerCase().includes(searchTerm.toLowerCase()) ||
         expo.location.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     if (statusFilter) {
-      filtered = filtered.filter(expo => expo.status === statusFilter);
+      filtered = filtered.filter((expo: Expo) => expo.status === statusFilter);
     }
     setFilteredExpos(filtered);
     setCurrentPage(1);
@@ -83,7 +83,14 @@ export default function ExpoManagement() {
 
   // Export functions
   const exportCSV = () => {
-    const csvData = filteredExpos.map(expo => ({
+    if (!Papa) {
+      import('papaparse').then((mod) => {
+        Papa = mod.default || mod;
+        exportCSV();
+      });
+      return;
+    }
+  const csvData = filteredExpos.map((expo: Expo) => ({
       Title: expo.title,
       Description: expo.description,
       Theme: expo.theme,
@@ -101,10 +108,17 @@ export default function ExpoManagement() {
   };
 
   const exportPDF = () => {
+    if (!jsPDF) {
+      import('jspdf').then((mod) => {
+        jsPDF = mod.default || mod;
+        exportPDF();
+      });
+      return;
+    }
     const doc = new jsPDF();
     doc.text('Expos Report', 20, 20);
     let y = 40;
-    filteredExpos.forEach(expo => {
+  filteredExpos.forEach((expo: Expo) => {
       doc.text(`${expo.title} - ${expo.location} - ${expo.status}`, 20, y);
       y += 10;
       if (y > 270) {
@@ -190,7 +204,7 @@ export default function ExpoManagement() {
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {paginatedExpos.map((expo) => (
+          {paginatedExpos.map((expo: Expo) => (
             <div key={expo.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
