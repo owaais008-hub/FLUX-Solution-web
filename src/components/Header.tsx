@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
             <div className="relative transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-500 to-pink-500 rounded-full blur-lg opacity-60 group-hover:opacity-80 animate-pulse"></div>
               <img 
-                src="/logo.png" 
+                src="/FLUX-Solution-web/logo.png" 
                 alt="Company Logo" 
                 className="h-12 w-12 md:h-14 md:w-14 rounded-full object-cover border-2 border-white/80 shadow-xl relative z-10 backdrop-blur-sm group-hover:border-cyan-300 transition-colors"
               />

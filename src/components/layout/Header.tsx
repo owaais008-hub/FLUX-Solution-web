@@ -8,7 +8,7 @@ export default function Header({ onEditProfile }: { onEditProfile: () => void })
     <header className="bg-white shadow-sm border-b border-gray-200 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <img 
-          src="/Screenshot%202025-10-22%20194707.png" 
+          src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png"
           alt="Background" 
           className="w-full h-full object-cover object-center"
         />

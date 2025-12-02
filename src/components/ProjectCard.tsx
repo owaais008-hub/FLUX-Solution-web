@@ -68,7 +68,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
         <div className="absolute inset-0 flex items-center justify-center">
           <img 
-            src="/Screenshot%202025-10-22%20194707.png" 
+            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
             alt={title} 
             className="w-full h-full object-contain opacity-20"
           />

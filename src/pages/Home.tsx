@@ -153,7 +153,7 @@ const Home: React.FC = () => {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 to-slate-900/75"></div>
           <ParallaxImage 
-            src="/Screenshot%202025-10-22%20194707.png" 
+            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
             alt="Background" 
             className="opacity-15"
             speed={0.25}
@@ -225,7 +225,7 @@ const Home: React.FC = () => {
                 <div className="relative w-full h-96 rounded-3xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 backdrop-blur-md border-2 border-cyan-400/40 overflow-hidden shadow-2xl hero-image-container hover:scale-105 transition-transform duration-700">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <img 
-                      src="/Screenshot%202025-10-22%20194707.png" 
+                      src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
                       alt="Innovation" 
                       className="w-full h-full object-cover opacity-25"
                     />

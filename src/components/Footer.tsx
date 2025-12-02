@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
               <div className="relative transform transition-transform duration-300 group-hover:scale-110">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-500 to-pink-500 rounded-full blur-md opacity-50 animate-pulse"></div>
                 <img 
-                  src="/logo.png" 
+                  src="/FLUX-Solution-web/logo.png" 
                   alt="Company Logo" 
                   className="w-14 h-14 rounded-full object-cover border-2 border-white/50 shadow-xl relative z-10 backdrop-blur-sm"
                 />
