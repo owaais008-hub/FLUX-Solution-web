@@ -1,5 +1,6 @@
 import React from 'react';
 import { Code2, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, ArrowRight, Wrench } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Footer: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const Footer: React.FC = () => {
           backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(56, 189, 248, 0.1) 2px, rgba(56, 189, 248, 0.1) 4px)`,
         }}></div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Company Info */}
@@ -21,9 +22,9 @@ const Footer: React.FC = () => {
             }}>
               <div className="relative transform transition-transform duration-300 group-hover:scale-110">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-blue-500 to-pink-500 rounded-full blur-md opacity-50 animate-pulse"></div>
-                <img 
-                  src="/FLUX-Solution-web/logo.png" 
-                  alt="Company Logo" 
+                <img
+                  src={logo}
+                  alt="Company Logo"
                   className="w-14 h-14 rounded-full object-cover border-2 border-white/50 shadow-xl relative z-10 backdrop-blur-sm"
                 />
               </div>
@@ -56,7 +57,7 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-4">
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'home' });
                     window.dispatchEvent(event);
@@ -67,7 +68,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'about' });
                     window.dispatchEvent(event);
@@ -78,7 +79,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'services' });
                     window.dispatchEvent(event);
@@ -89,7 +90,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'projects' });
                     window.dispatchEvent(event);
@@ -100,7 +101,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'contact' });
                     window.dispatchEvent(event);
@@ -121,7 +122,7 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-4">
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'services' });
                     window.dispatchEvent(event);
@@ -132,7 +133,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'services' });
                     window.dispatchEvent(event);
@@ -143,7 +144,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'services' });
                     window.dispatchEvent(event);
@@ -154,7 +155,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'services' });
                     window.dispatchEvent(event);
@@ -165,7 +166,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'services' });
                     window.dispatchEvent(event);
@@ -176,7 +177,7 @@ const Footer: React.FC = () => {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'services' });
                     window.dispatchEvent(event);
@@ -224,7 +225,7 @@ const Footer: React.FC = () => {
                 </div>
               </li>
               <li className="mt-6">
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'contact' });
                     window.dispatchEvent(event);

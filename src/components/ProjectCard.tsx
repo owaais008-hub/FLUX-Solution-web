@@ -1,5 +1,6 @@
 import React from 'react';
 import { ExternalLink, Github, Monitor, Brush, Wrench } from 'lucide-react';
+import heroBg from '../assets/hero-bg.png';
 
 interface ProjectCardProps {
   title: string;
@@ -10,13 +11,13 @@ interface ProjectCardProps {
   onClick?: () => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ 
-  title, 
-  description, 
-  technologies, 
+const ProjectCard: React.FC<ProjectCardProps> = ({
+  title,
+  description,
+  technologies,
   category,
   gradientClass,
-  onClick 
+  onClick
 }) => {
   const getCategoryIcon = () => {
     switch (category) {
@@ -67,9 +68,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </button>
         </div>
         <div className="absolute inset-0 flex items-center justify-center">
-          <img 
-            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
-            alt={title} 
+          <img
+            src={heroBg}
+            alt={title}
             className="w-full h-full object-contain opacity-20"
           />
           {getCategoryIcon()}

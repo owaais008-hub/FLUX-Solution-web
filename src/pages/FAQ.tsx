@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HelpCircle } from 'lucide-react';
+import heroBg from '../assets/hero-bg.png';
 import AnimatedCodeDisplay from '../components/AnimatedCodeDisplay';
 import ParticleBackground from '../components/ParticleBackground';
 
@@ -74,8 +75,8 @@ const FAQ: React.FC = () => {
     { id: 'technology', name: 'Technology' }
   ];
 
-  const filteredItems = activeCategory === 'all' 
-    ? faqItems 
+  const filteredItems = activeCategory === 'all'
+    ? faqItems
     : faqItems.filter(item => item.category === activeCategory);
 
   const toggleQuestion = (id: number) => {
@@ -85,31 +86,31 @@ const FAQ: React.FC = () => {
   return (
     <div>
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-64 md:py-80 relative overflow-hidden">
-        <ParticleBackground 
+        <ParticleBackground
           particleCount={40}
           particleColor="rgba(56, 189, 248, 0.2)"
           particleSize={2}
           speed={0.1}
           className="opacity-20"
         />
-        
+
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-slate-900/70"></div>
-          <img 
-            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
-            alt="FAQ" 
+          <img
+            src={heroBg}
+            alt="FAQ"
             className="w-full h-full object-cover opacity-20 animate-pulse-slow"
           />
           <AnimatedCodeDisplay density="medium" speed="medium" colorScheme="rainbow" trailEffect glowEffect className="opacity-25" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-flex items-center px-4 py-2 bg-blue-500/20 rounded-full border border-blue-500/30 backdrop-blur-sm mb-6 shadow-lg">
               <HelpCircle className="w-4 h-4 mr-2 text-cyan-400" />
               <span className="text-sm font-medium text-cyan-300">FAQ</span>
             </div>
-            
+
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Frequently Asked <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Questions</span>
             </h1>
@@ -132,11 +133,10 @@ const FAQ: React.FC = () => {
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`px-5 py-2 rounded-full font-medium transition-all ${
-                    activeCategory === category.id
-                      ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                  }`}
+                  className={`px-5 py-2 rounded-full font-medium transition-all ${activeCategory === category.id
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                    }`}
                 >
                   {category.name}
                 </button>
@@ -147,7 +147,7 @@ const FAQ: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-4">
               {filteredItems.map((item) => (
-                <div 
+                <div
                   key={item.id}
                   className="bg-white rounded-2xl shadow-lg border border-gray-100/50 overflow-hidden transition-all duration-300"
                 >
@@ -162,7 +162,7 @@ const FAQ: React.FC = () => {
                       </svg>
                     </div>
                   </button>
-                  
+
                   {openQuestion === item.id && (
                     <div className="px-6 pb-6 pt-2 border-t border-gray-100">
                       <p className="text-gray-600">{item.answer}</p>

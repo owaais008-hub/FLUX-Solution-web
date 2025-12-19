@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import heroBg from '../assets/hero-bg.png';
 import emailjs from '@emailjs/browser';
 import AnimatedCodeDisplay from '../components/AnimatedCodeDisplay';
 import ParticleBackground from '../components/ParticleBackground';
@@ -25,34 +26,34 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   });
-  
+
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-    
+
     if (!formData.subject.trim()) {
       newErrors.subject = 'Subject is required';
     }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.length < 10) {
       newErrors.message = 'Message should be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -60,7 +61,7 @@ const Contact: React.FC = () => {
   // Add real-time validation as user types
   const validateField = (name: string, value: string) => {
     const newErrors = { ...errors };
-    
+
     switch (name) {
       case 'name':
         if (!value.trim()) {
@@ -95,17 +96,17 @@ const Contact: React.FC = () => {
         }
         break;
     }
-    
+
     setErrors(newErrors);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       setIsSubmitting(true);
       setErrors({});
-      
+
       try {
         // Send email using EmailJS
         const templateParams = {
@@ -115,20 +116,20 @@ const Contact: React.FC = () => {
           message: formData.message,
           to_email: 'flux.solution929@gmail.com'
         };
-        
+
         // Get EmailJS credentials from environment variables
         const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
         const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
         const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-        
+
         // Check if credentials are configured
         if (!serviceID || !templateID || !publicKey) {
           throw new Error('Email service not properly configured. Please contact the site administrator.');
         }
-        
+
         // Send email via EmailJS
         await emailjs.send(serviceID, templateID, templateParams, publicKey);
-        
+
         // Store in database (existing functionality)
         const { contactApi } = await import('../lib/services');
         const { error } = await contactApi.submitMessage(
@@ -137,13 +138,13 @@ const Contact: React.FC = () => {
           formData.subject,
           formData.message
         );
-        
+
         if (error) throw error;
-        
+
         // Success - show confirmation
         setIsSubmitting(false);
         setIsSubmitted(true);
-        
+
         // Reset form after successful submission
         setFormData({
           name: '',
@@ -151,7 +152,7 @@ const Contact: React.FC = () => {
           subject: '',
           message: ''
         });
-        
+
         // Reset success message after 5 seconds
         setTimeout(() => {
           setIsSubmitted(false);
@@ -159,8 +160,8 @@ const Contact: React.FC = () => {
       } catch (error: unknown) {
         console.error('Error submitting message:', error);
         setIsSubmitting(false);
-        setErrors({ 
-          message: error instanceof Error ? error.message : 'Failed to send message. Please try again.' 
+        setErrors({
+          message: error instanceof Error ? error.message : 'Failed to send message. Please try again.'
         });
       }
     }
@@ -172,7 +173,7 @@ const Contact: React.FC = () => {
       ...formData,
       [name]: value
     });
-    
+
     // Validate field in real-time
     validateField(name, value);
   };
@@ -180,47 +181,47 @@ const Contact: React.FC = () => {
   return (
     <div>
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-64 md:py-80 relative overflow-hidden">
-        <ParticleBackground 
+        <ParticleBackground
           particleCount={40}
           particleColor="rgba(56, 189, 248, 0.2)"
           particleSize={2}
           speed={0.1}
           className="opacity-20"
         />
-        
+
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-slate-900/70"></div>
-          <img 
-            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
-            alt="Contact" 
+          <img
+            src={heroBg}
+            alt="Contact"
             className="w-full h-full object-cover opacity-10 animate-pulse-slow"
           />
           <AnimatedCodeDisplay density="medium" speed="medium" colorScheme="rainbow" trailEffect glowEffect className="opacity-25" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto relative z-10">
             <div className="inline-flex items-center px-4 py-2 bg-blue-500/20 rounded-full border border-blue-500/30 backdrop-blur-sm mb-6 shadow-lg">
               <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
               <span className="text-sm font-medium text-cyan-300">CONTACT US</span>
             </div>
-            
+
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Get In <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Touch</span>
             </h1>
             <p className="text-xl text-gray-300 leading-relaxed mb-10">
               Have a project in mind? At Flux Solutions, we're ready to help bring your ideas to life with our expert development team. Let's discuss how we can transform your vision into a reality.
             </p>
-            
+
             <div className="flex flex-wrap justify-center gap-4">
-              <a 
+              <a
                 href="tel:+923194699095"
                 className="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-xl font-semibold border border-white/30 hover:bg-white/30 transition-all duration-300 flex items-center space-x-2 hover:scale-105 shadow-lg"
               >
                 <Phone className="w-5 h-5" />
                 <span>Call Now</span>
               </a>
-              <a 
+              <a
                 href="mailto:flux.solution929@gmail.com"
                 className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300 flex items-center space-x-2 backdrop-blur-sm hover:scale-105 shadow-lg"
               >
@@ -303,11 +304,10 @@ const Contact: React.FC = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${
-                        errors.name 
-                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100' 
+                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${errors.name
+                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
                           : 'border-gray-300 focus:border-blue-500 focus:ring-blue-100'
-                      }`}
+                        }`}
                       placeholder="John Doe"
                     />
                     {errors.name && <p className="mt-1 text-red-500 text-sm">{errors.name}</p>}
@@ -323,11 +323,10 @@ const Contact: React.FC = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${
-                        errors.email 
-                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100' 
+                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${errors.email
+                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
                           : 'border-gray-300 focus:border-blue-500 focus:ring-blue-100'
-                      }`}
+                        }`}
                       placeholder="john@example.com"
                     />
                     {errors.email && <p className="mt-1 text-red-500 text-sm">{errors.email}</p>}
@@ -343,11 +342,10 @@ const Contact: React.FC = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${
-                        errors.subject 
-                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100' 
+                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${errors.subject
+                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
                           : 'border-gray-300 focus:border-blue-500 focus:ring-blue-100'
-                      }`}
+                        }`}
                       placeholder="Project Inquiry"
                     />
                     {errors.subject && <p className="mt-1 text-red-500 text-sm">{errors.subject}</p>}
@@ -363,11 +361,10 @@ const Contact: React.FC = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={6}
-                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none resize-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${
-                        errors.message 
-                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100' 
+                      className={`w-full px-5 py-4 rounded-xl border focus:ring-4 transition-all duration-300 outline-none resize-none text-gray-900 font-medium backdrop-blur-sm bg-white/50 shadow-sm ${errors.message
+                          ? 'border-red-500 focus:border-red-500 focus:ring-red-100'
                           : 'border-gray-300 focus:border-blue-500 focus:ring-blue-100'
-                      }`}
+                        }`}
                       placeholder="Tell us about your project..."
                     />
                     {errors.message && <p className="mt-1 text-red-500 text-sm">{errors.message}</p>}
@@ -379,9 +376,8 @@ const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-5 rounded-xl font-bold hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 flex items-center justify-center space-x-3 text-lg group backdrop-blur-sm hover:scale-105 shadow-lg ${
-                      isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
-                    }`}
+                    className={`w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-5 rounded-xl font-bold hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 flex items-center justify-center space-x-3 text-lg group backdrop-blur-sm hover:scale-105 shadow-lg ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                      }`}
                   >
                     {isSubmitting ? (
                       <>
@@ -411,15 +407,15 @@ const Contact: React.FC = () => {
               Visit our office in the heart of Karachi, Sindh
             </p>
           </div>
-          
+
           <div className="bg-gradient-to-br from-gray-100/80 to-gray-200/80 rounded-3xl p-1 shadow-xl backdrop-blur-sm border border-white/30 hover:shadow-2xl transition-all duration-300">
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl h-96 flex items-center justify-center border border-white/30 overflow-hidden">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d234700.9539197571!2d67.02259535820315!3d24.860734299999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f44555a0c23!2sKarachi%2C%20Sindh%2C%20Pakistan!5e0!3m2!1sen!2s!4v1650000000000!5m2!1sen!2s" 
-                width="100%" 
-                height="100%" 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d234700.9539197571!2d67.02259535820315!3d24.860734299999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e06651d4bbf%3A0x9cf92f44555a0c23!2sKarachi%2C%20Sindh%2C%20Pakistan!5e0!3m2!1sen!2s!4v1650000000000!5m2!1sen!2s"
+                width="100%"
+                height="100%"
                 className="rounded-2xl border-0"
-                allowFullScreen={true} 
+                allowFullScreen={true}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade">
               </iframe>
@@ -427,7 +423,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </section>
-      
+
     </div>
   );
 };

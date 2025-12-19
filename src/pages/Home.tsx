@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Heart, Code2, Palette, Monitor, Globe, Image, Wrench, Loader2 } from 'lucide-react';
+import heroBg from '../assets/hero-bg.png';
 import AnimatedCodeDisplay from '../components/AnimatedCodeDisplay';
 import ParticleBackground from '../components/ParticleBackground';
 import TypingText from '../components/TypingText';
@@ -141,20 +142,20 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden min-h-screen flex items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 -z-10"></div>
-        
-        <ParticleBackground 
+
+        <ParticleBackground
           particleCount={60}
           particleColor="rgba(56, 189, 248, 0.4)"
           particleSize={3}
           speed={0.25}
           className="opacity-40"
         />
-        
+
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 to-slate-900/75"></div>
-          <ParallaxImage 
-            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
-            alt="Background" 
+          <ParallaxImage
+            src={heroBg}
+            alt="Background"
             className="opacity-15"
             speed={0.25}
           />
@@ -170,7 +171,7 @@ const Home: React.FC = () => {
                   <span className="text-sm font-medium text-cyan-300">NEW INNOVATION RELEASED</span>
                 </div>
               </ScrollReveal>
-              
+
               <ScrollReveal direction="up" delay={0.3}>
                 <div>
                   <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -179,7 +180,7 @@ const Home: React.FC = () => {
                     </span>
                     <br />
                     <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                      <TypingText 
+                      <TypingText
                         texts={['Experiences', 'Solutions', 'Innovations', 'Applications']}
                         speed={120}
                         pauseDuration={2000}
@@ -195,7 +196,7 @@ const Home: React.FC = () => {
 
               <ScrollReveal direction="up" delay={0.4}>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
+                  <button
                     onClick={() => {
                       const event = new CustomEvent('navigateToPage', { detail: 'services' });
                       window.dispatchEvent(event);
@@ -205,8 +206,8 @@ const Home: React.FC = () => {
                     <span>EXPLORE SERVICES</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                   </button>
-                  
-                  <button 
+
+                  <button
                     onClick={() => {
                       const event = new CustomEvent('navigateToPage', { detail: 'projects' });
                       window.dispatchEvent(event);
@@ -224,25 +225,25 @@ const Home: React.FC = () => {
               <div className="relative">
                 <div className="relative w-full h-96 rounded-3xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 backdrop-blur-md border-2 border-cyan-400/40 overflow-hidden shadow-2xl hero-image-container hover:scale-105 transition-transform duration-700">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <img 
-                      src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
-                      alt="Innovation" 
+                    <img
+                      src={heroBg}
+                      alt="Innovation"
                       className="w-full h-full object-cover opacity-25"
                     />
                     <div className="absolute w-72 h-72 bg-gradient-to-br from-cyan-400 via-blue-500 to-pink-500 rounded-full blur-3xl opacity-40 animate-pulse"></div>
                   </div>
-                  
+
                   <div className="absolute top-8 left-8 w-20 h-20 bg-white/15 backdrop-blur-md rounded-2xl border border-white/30 flex items-center justify-center shadow-xl animate-float hover:scale-110 transition-transform duration-300">
                     <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-lg"></div>
                   </div>
-                  
+
                   <div className="absolute bottom-8 right-8 w-24 h-24 bg-white/15 backdrop-blur-md rounded-2xl border border-white/30 flex items-center justify-center shadow-xl animate-float-delay hover:scale-110 transition-transform duration-300">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl"></div>
                   </div>
 
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white/5 backdrop-blur-sm rounded-full border border-white/20 animate-pulse"></div>
                 </div>
-                
+
                 <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-br from-cyan-400/40 to-blue-500/40 rounded-3xl blur-2xl animate-pulse"></div>
                 <div className="absolute -top-8 -right-8 w-40 h-40 bg-gradient-to-br from-purple-400/40 to-pink-500/40 rounded-3xl blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
               </div>
@@ -303,9 +304,9 @@ const Home: React.FC = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <ScrollReveal 
+                <ScrollReveal
                   key={service.id || index}
-                  direction="up" 
+                  direction="up"
                   delay={0.1 * (index + 1)}
                   className="h-full"
                 >
@@ -348,12 +349,12 @@ const Home: React.FC = () => {
                   Our latest innovations in web application development that showcase our expertise and creativity
                 </p>
               </div>
-              
+
               <div className="flex space-x-4 mt-6 md:mt-0">
                 <button className="p-4 rounded-full border-2 border-gray-200 hover:border-pink-500 hover:text-pink-500 hover:bg-pink-50 transition-all duration-300 shadow-sm hover:shadow-lg backdrop-blur-sm bg-white/80 hover:scale-110 active:scale-95">
                   <Heart className="w-5 h-5" />
                 </button>
-                <button 
+                <button
                   onClick={() => {
                     const event = new CustomEvent('navigateToPage', { detail: 'projects' });
                     window.dispatchEvent(event);
@@ -377,13 +378,13 @@ const Home: React.FC = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {projects.map((project, index) => (
-                <ScrollReveal 
+                <ScrollReveal
                   key={project.id || index}
-                  direction="up" 
+                  direction="up"
                   delay={0.15 * (index + 1)}
                   className="h-full"
                 >
-                  <div 
+                  <div
                     className="group relative overflow-hidden rounded-3xl aspect-square bg-gradient-to-br from-slate-800 to-slate-900 cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-500 backdrop-blur-sm border-2 border-white/20 hover:border-cyan-400/50 hover:scale-105 hover:-translate-y-2"
                     onClick={() => {
                       const event = new CustomEvent('navigateToPage', { detail: 'projects' });
@@ -391,14 +392,14 @@ const Home: React.FC = () => {
                     }}
                   >
                     {project.image_url ? (
-                      <img 
-                        src={project.image_url} 
+                      <img
+                        src={project.image_url}
                         alt={project.title}
                         className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500"
                       />
                     ) : null}
                     <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient || 'from-blue-500 via-cyan-500 to-teal-500'} group-hover:opacity-95 transition-opacity duration-500`}></div>
-                    
+
                     <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
                       <div className="transform translate-y-6 group-hover:translate-y-0 transition-all duration-500">
                         <div className="mb-2">
@@ -417,9 +418,9 @@ const Home: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    
+
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
+
                     <div className="absolute top-4 right-4 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform scale-0 group-hover:scale-100">
                       <ArrowRight className="w-4 h-4 text-white" />
                     </div>
@@ -428,10 +429,10 @@ const Home: React.FC = () => {
               ))}
             </div>
           )}
-          
+
           <ScrollReveal direction="up" delay={0.5}>
             <div className="text-center mt-16">
-              <button 
+              <button
                 onClick={() => {
                   const event = new CustomEvent('navigateToPage', { detail: 'contact' });
                   window.dispatchEvent(event);

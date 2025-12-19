@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://owaisworkers-blip.github.io/FLUX-Solution-web",
+  "homepage": "https://owaais008-hub.github.io/FLUX-Solution-web",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Github, Code2, Palette, Filter, Monitor, Brush, Wrench, Star, Loader2 } from 'lucide-react';
+import heroBg from '../assets/hero-bg.png';
 import AnimatedCodeDisplay from '../components/AnimatedCodeDisplay';
 import ParticleBackground from '../components/ParticleBackground';
 import ProjectCard from '../components/ProjectCard';
@@ -15,7 +16,7 @@ const Projects: React.FC = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       setLoading(true);
-      
+
       try {
         // API has built-in fallback, so we don't need to handle errors here
         const { data } = await projectsApi.getAll();
@@ -55,19 +56,19 @@ const Projects: React.FC = () => {
   return (
     <div>
       <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white py-64 md:py-80 relative overflow-hidden">
-        <ParticleBackground 
+        <ParticleBackground
           particleCount={40}
           particleColor="rgba(56, 189, 248, 0.2)"
           particleSize={2}
           speed={0.1}
           className="opacity-20"
         />
-        
+
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-slate-900/70"></div>
-          <img 
-            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
-            alt="Projects" 
+          <img
+            src={heroBg}
+            alt="Projects"
             className="w-full h-full object-cover opacity-20 animate-pulse-slow"
           />
           <AnimatedCodeDisplay density="medium" speed="medium" colorScheme="rainbow" trailEffect glowEffect className="opacity-25" />
@@ -94,54 +95,49 @@ const Projects: React.FC = () => {
             <div className="flex space-x-3">
               <button
                 onClick={() => setActiveFilter('all')}
-                className={`px-6 py-2 rounded-full font-medium transition-all backdrop-blur-sm ${
-                  activeFilter === 'all'
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
-                    : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
-                }`}
+                className={`px-6 py-2 rounded-full font-medium transition-all backdrop-blur-sm ${activeFilter === 'all'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
+                  }`}
               >
                 All Projects
               </button>
               <button
                 onClick={() => setActiveFilter('web')}
-                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${
-                  activeFilter === 'web'
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
-                    : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
-                }`}
+                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${activeFilter === 'web'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
+                  }`}
               >
                 <Code2 className="w-4 h-4" />
                 <span>Web Development</span>
               </button>
               <button
                 onClick={() => setActiveFilter('graphic')}
-                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${
-                  activeFilter === 'graphic'
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
-                    : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
-                }`}
+                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${activeFilter === 'graphic'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
+                  }`}
               >
                 <Palette className="w-4 h-4" />
                 <span>Graphic Design</span>
               </button>
               <button
                 onClick={() => setActiveFilter('wordpress')}
-                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${
-                  activeFilter === 'wordpress'
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
-                    : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
-                }`}
+                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${activeFilter === 'wordpress'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
+                  }`}
               >
                 <Wrench className="w-4 h-4" />
                 <span>WordPress</span>
               </button>
               <button
                 onClick={() => setActiveFilter('mobile')}
-                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${
-                  activeFilter === 'mobile'
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
-                    : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
-                }`}
+                className={`px-6 py-2 rounded-full font-medium transition-all flex items-center space-x-2 backdrop-blur-sm ${activeFilter === 'mobile'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white/80 text-gray-600 hover:bg-white/90 border border-white/30'
+                  }`}
               >
                 <Monitor className="w-4 h-4" />
                 <span>Mobile</span>
@@ -157,8 +153,8 @@ const Projects: React.FC = () => {
           ) : filteredProjects.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-gray-600">
-                {activeFilter === 'all' 
-                  ? 'No projects available at the moment.' 
+                {activeFilter === 'all'
+                  ? 'No projects available at the moment.'
                   : `No ${activeFilter} projects found.`}
               </p>
             </div>
@@ -198,7 +194,7 @@ const Projects: React.FC = () => {
           <p className="text-gray-600 mb-8 leading-relaxed">
             Let's work together to bring your ideas to life with cutting-edge technology and beautiful design.
           </p>
-          <button 
+          <button
             onClick={() => {
               // Dispatch a custom event to navigate to the contact page
               const event = new CustomEvent('navigateToPage', { detail: 'contact' });
@@ -210,7 +206,7 @@ const Projects: React.FC = () => {
           </button>
         </div>
       </section>
-      
+
     </div>
   );
 };

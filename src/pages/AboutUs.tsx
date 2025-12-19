@@ -64,7 +64,7 @@ const AboutUs: React.FC = () => {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-slate-900/70"></div>
           <img 
-            src="/FLUX-Solution-web/Screenshot%202025-10-22%20194707.png" 
+            src="/Screenshot%202025-10-22%20194707.png" 
             alt="About Us" 
             className="w-full h-full object-cover opacity-10 animate-pulse-slow"
           />
